@@ -1,0 +1,59 @@
+1. What is a Generator?
+A generator is a special type of function in JavaScript (and also in Python) that can be paused and resumed. It doesn’t run all at once but yields values one at a time on demand.
+
+In JavaScript, a generator function is declared using function* syntax and uses the yield keyword to return values.
+
+
+function* countUp() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const counter = countUp();
+console.log(counter.next()); // { value: 1, done: false }
+console.log(counter.next()); // { value: 2, done: false }
+console.log(counter.next()); // { value: 3, done: false }
+console.log(counter.next()); // { value: undefined, done: true }
+2. Why Do We Need Generators?
+We use generators for:
+
+Lazy Evaluation: Generate values on demand (e.g., infinite sequences).
+
+Memory Efficiency: Don’t store all values at once.
+
+Asynchronous Flow Control: Used with libraries like co, or for writing async logic in a synchronous-looking way.
+
+Iterating large datasets without loading everything into memory.
+
+3. Where Do We Use Generators in Real Applications?
+Pagination or streaming data from APIs or databases.
+
+Custom iterable objects where we want to control iteration manually.
+
+Handling async code (before async/await became common).
+
+State machines or task schedulers.
+
+4. What Does yield Keyword Do?
+The yield keyword pauses the function execution and returns a value to the caller. Execution resumes from the same place on next .next() call.
+
+
+function* gen() {
+  console.log('Start');
+  yield 10;
+  console.log('Middle');
+  yield 20;
+  console.log('End');
+}
+5. What is Callback Hell?
+Callback Hell is a situation where callbacks are nested deeply, making code hard to read and maintain.
+
+
+doSomething(function (err, result) {
+  doSomethingElse(result, function (err, result2) {
+    doMore(result2, function (err, result3) {
+      // and so on...
+    });
+  });
+});
